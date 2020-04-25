@@ -1,0 +1,26 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'new.css' %}">
+</head>
+<body>
+    <a href="{% url  'new_film' %}">Add new</a>
+    {% if films|length == 0 %}
+            <h2>No films in database</h2>
+    {% else %}
+        <h2>Amount films in database: {{films|length}}</h2>
+        {% for film in films %}
+            <h3>{{ film }}</h3>
+            <p>{{ film.description }}</p>
+            <a href="{% url 'edit_film' film.id %}">Edit</a>
+            <a href="{% url 'delete_film' film.id %}">Delete</a>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
