@@ -1,37 +1,40 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'new.css' %}">
-</head>
-<body>
+{% extends 'main.html' %}
+{% block title %} Lista filmów {% endblock %}
 
-    {% if user.is_authenticated %}
-        Hello {{ user.username }} <br>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
+{%block site %}
+    <div class="jumbotron">
+        {% if user.is_authenticated %}
+        <h1 class="display-4">Hello {{ user.username }}</h1>
+            <a href="{% url 'logout' %}" class="btn btn-success">Logout <i class="fas fa-sign-out-alt"></i></a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-success">Login <i class="fas fa-sign-in-alt"></i></a>
+        {% endif %}
+    </div>
 
-
-    <hr>
-
-    <a href="{% url  'new_film' %}">Add new</a>
+    <a href="{% url  'new_film' %}">Add new <i class="fas fa-plus-circle"></i></a>
     {% if films|length == 0 %}
             <h2>No films in database</h2>
     {% else %}
-        <h2>Amount films in database: {{films|length}}</h2>
+        <!--        <h2>Amount films in database: {{films|length}}</h2>-->
+
         {% for film in films %}
-            <h3>{{ film }}</h3>
-            <p>{{ film.description }}</p>
-            <a href="{% url 'edit_film' film.id %}">Edit</a>
-            <a href="{% url 'delete_film' film.id %}">Delete</a>
+            <div class="card" style="width: 26rem;">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-9">
+                          <h5 class="card-title">{{ film }}</h5>
+                      </div>
+                      <div class="col-3">
+                          <a href="{% url 'edit_film' film.id %}"><i class="fas fa-2x fa-edit"></i></a>
+                          <a href="{% url 'delete_film' film.id %}"><i class="fas fa-2x fa-trash-alt"></i></a>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <p class="card-text">{{ film.description }}</p>
+                  </div>
+              </div>
+            </div>
         {% endfor %}
     {% endif %}
-</body>
-</html>
+
+{% endblock %}
