@@ -2,10 +2,15 @@
 {% block title%}Potwierdź{% endblock %}
 
 {% block site %}
-    <h1>Are you really want to delete "{{ film.title }}" film?</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit=">delete</button>
-    </form>
+    <div class="card" style="width: 32rem;">
+      <div class="card-body">
+          <h5 class="card-title">Do you really want to delete "{{ film.title }}" film?</h5>
+          <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">delete</button>
+          </form>
+      </div>
+    </div>
+
     <a href="{% url  'all_films' %}">back</a>
 {% endblock %}

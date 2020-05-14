@@ -5,11 +5,28 @@
 
 {% block site %}
 <body>
+
+    <div class="card" style="width: 32rem;">
+      <div class="card-body">
+        {% if is_new %}
+          <h5 class="card-title">New film</h5>
+        {% else %}
+          <h5 class="card-title">Edit film</h5>
+        {% endif %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form | bootstrap }}
-        <button type="submit">Add new film</button>
+        {% if is_new %}
+            <button type="submit" class="btn btn-primary">New Film</button>
+        {% else %}
+            <button type="submit" class="btn btn-primary">Edit Film</button>
+        {% endif %}
     </form>
+      </div>
+    </div>
+
+
     <a href="{% url  'all_films' %}">back</a>
+
 
 {% endblock %}

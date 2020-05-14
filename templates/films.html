@@ -18,19 +18,20 @@
         <!--        <h2>Amount films in database: {{films|length}}</h2>-->
 
         {% for film in films %}
-            <div class="card" style="width: 26rem;">
+            <div class="card" style="width: 36rem;">
               <div class="card-body">
+                  <img src="/media/{{film.poster}}" class="film-poster">
                   <div class="row">
                       <div class="col-9">
                           <h5 class="card-title">{{ film }}</h5>
                       </div>
                       <div class="col-3">
-                          <a href="{% url 'edit_film' film.id %}"><i class="fas fa-2x fa-edit"></i></a>
-                          <a href="{% url 'delete_film' film.id %}"><i class="fas fa-2x fa-trash-alt"></i></a>
+                          <a href="{% url 'edit_film' film.id %}" class="film-icon"><i class="fas fa-edit"></i></a>
+                          <a href="{% url 'delete_film' film.id %}" class="film-icon"><i class="fas fa-trash-alt"></i></a>
                       </div>
                   </div>
                   <div class="row">
-                    <p class="card-text">{{ film.description }}</p>
+                    <p class="card-text description">{{ film.description }}</p>
                   </div>
               </div>
             </div>
