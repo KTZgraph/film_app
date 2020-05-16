@@ -4,9 +4,7 @@
 {% block title %} Film form {% endblock %}
 
 {% block site %}
-<body>
-
-    <div class="card" style="width: 32rem;">
+    <div class="card" style="width: 32rem; float:left; margin-right: 1rem">
       <div class="card-body">
         {% if is_new %}
           <h5 class="card-title">New film</h5>
@@ -16,6 +14,7 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form | bootstrap }}
+        {{ additional_form | bootstrap }}
         {% if is_new %}
             <button type="submit" class="btn btn-primary">New Film</button>
         {% else %}
@@ -25,6 +24,36 @@
       </div>
     </div>
 
+    <div class="card" style="width: 32rem;">
+      <div class="card-body">
+          <h5 class="card-title">Aktorzy</h5>
+            {% for actor in actors %}
+                <b>{{actor.name}} {{actor.surname}}</b>
+            {% endfor %}
+      </div>
+    </div>
+
+    <div class="card" style="width: 32rem;">
+      <div class="card-body">
+          <h5 class="card-title">Oceń film</h5>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ rating_form | bootstrap }}
+        <button type="submit" class="btn btn-primary">Oceń</button>
+    </form>
+      </div>
+    </div>
+
+
+    {% for rating in ratings%}
+        <h4>Gwiazdki: {{rating.stars}} </h4>
+        <p>Recenzja: {{rating.review}} </p>
+    {% endfor %}
+
+    {% for rating in ratings%}
+        <h4>Gwiazdki: {{rating.stars}} </h4>
+        <p>Recenzja: {{rating.review}} </p>
+    {% endfor %}
 
     <a href="{% url  'all_films' %}">back</a>
 
