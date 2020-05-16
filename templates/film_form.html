@@ -33,6 +33,7 @@
       </div>
     </div>
 
+    {% if rating_form %}
     <div class="card" style="width: 32rem;">
       <div class="card-body">
           <h5 class="card-title">Oceń film</h5>
@@ -43,6 +44,7 @@
     </form>
       </div>
     </div>
+    {% endif %}
 
 
     {% for rating in ratings%}
